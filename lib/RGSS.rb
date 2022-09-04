@@ -163,26 +163,31 @@ module RGSS
 
   # other classes that don't need definitions
   [ # RGSS data structures
-   [:RPG, :Actor], [:RPG, :Animation], [:RPG, :Animation, :Frame],
-   [:RPG, :Animation, :Timing], [:RPG, :Area], [:RPG, :Armor], [:RPG, :AudioFile],
-   [:RPG, :BaseItem], [:RPG, :BaseItem, :Feature], [:RPG, :BGM], [:RPG, :BGS],
-   [:RPG, :Class], [:RPG, :Class, :Learning], [:RPG, :CommonEvent], [:RPG, :Enemy],
-   [:RPG, :Enemy, :Action], [:RPG, :Enemy, :DropItem], [:RPG, :EquipItem],
-   [:RPG, :Event], [:RPG, :Event, :Page], [:RPG, :Event, :Page, :Condition],
-   [:RPG, :Event, :Page, :Graphic], [:RPG, :Item], [:RPG, :Map],
-   [:RPG, :Map, :Encounter], [:RPG, :MapInfo], [:RPG, :ME], [:RPG, :MoveCommand],
-   [:RPG, :MoveRoute], [:RPG, :SE], [:RPG, :Skill], [:RPG, :State],
-   [:RPG, :System, :Terms], [:RPG, :System, :TestBattler], [:RPG, :System, :Vehicle],
-   [:RPG, :System, :Words], [:RPG, :Tileset], [:RPG, :Troop], [:RPG, :Troop, :Member],
-   [:RPG, :Troop, :Page], [:RPG, :Troop, :Page, :Condition], [:RPG, :UsableItem],
-   [:RPG, :UsableItem, :Damage], [:RPG, :UsableItem, :Effect], [:RPG, :Weapon],
-   # Script classes serialized in save game files
-   [:Game_ActionResult], [:Game_Actor], [:Game_Actors], [:Game_BaseItem],
-   [:Game_BattleAction], [:Game_CommonEvent], [:Game_Enemy], [:Game_Event],
-   [:Game_Follower], [:Game_Followers], [:Game_Interpreter], [:Game_Map],
-   [:Game_Message], [:Game_Party], [:Game_Picture], [:Game_Pictures], [:Game_Player],
-   [:Game_System], [:Game_Timer], [:Game_Troop], [:Game_Screen], [:Game_Vehicle],
-   [:Interpreter]
+    [:RPG, :Actor], [:RPG, :Animation], [:RPG, :Animation, :Frame],
+    [:RPG, :Animation, :Timing], [:RPG, :Area], [:RPG, :Armor], [:RPG, :AudioFile],
+    [:RPG, :BaseItem], [:RPG, :BaseItem, :Feature], [:RPG, :BGM], [:RPG, :BGS],
+    [:RPG, :Class], [:RPG, :Class, :Learning], [:RPG, :CommonEvent], [:RPG, :Enemy],
+    [:RPG, :Enemy, :Action], [:RPG, :Enemy, :DropItem], [:RPG, :EquipItem],
+    [:RPG, :Event], [:RPG, :Event, :Page], [:RPG, :Event, :Page, :Condition],
+    [:RPG, :Event, :Page, :Graphic], [:RPG, :Item], [:RPG, :Map],
+    [:RPG, :Map, :Encounter], [:RPG, :MapInfo], [:RPG, :ME], [:RPG, :MoveCommand],
+    [:RPG, :MoveRoute], [:RPG, :SE], [:RPG, :Skill], [:RPG, :State],
+    [:RPG, :System, :Terms], [:RPG, :System, :TestBattler], [:RPG, :System, :Vehicle],
+    [:RPG, :System, :Words], [:RPG, :Tileset], [:RPG, :Troop], [:RPG, :Troop, :Member],
+    [:RPG, :Troop, :Page], [:RPG, :Troop, :Page, :Condition], [:RPG, :UsableItem],
+    [:RPG, :UsableItem, :Damage], [:RPG, :UsableItem, :Effect], [:RPG, :Weapon],
+    # Script classes serialized in save game files
+    [:Game_Action], [:Game_ActionResult], [:Game_Actor], [:Game_Actors],
+    [:Game_BaseItem], [:Game_BattleAction], [:Game_Battler], [:Game_BattlerBase],
+    [:Game_Character], [:Game_CharacterBase], [:Game_CommonEvent], [:Game_Enemy],
+    [:Game_Event], [:Game_Follower], [:Game_Followers], [:Game_Interpreter], [:Game_Map],
+    [:Game_Message], [:Game_Party], [:Game_Picture], [:Game_Pictures], [:Game_Player],
+    [:Game_Screen], [:Game_SelfSwitches], [:Game_Switches], [:Game_System], [:Game_Temp],
+    [:Game_Timer], [:Game_Troop], [:Game_Unit], [:Game_Variables], [:Game_Vehicle],
+    [:Interpreter],
+    # Custom stuff I added to make custom shit work
+    [:Command_Attack], [:Command_Guard], [:Command_Item], [:Command_Skill],
+    [:Command_UseItem], [:Command_UseSkill], [:Game_BattlerCommand], [:Game_Command]
   ].each {|x| process(Object, *x)}
 
   def self.setup_system(version, options)

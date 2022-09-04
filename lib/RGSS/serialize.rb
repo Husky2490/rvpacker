@@ -291,7 +291,10 @@ module RGSS
   #           :table_width - maximum number of entries per row for table data, -1 for no
   #                          table row limit (default 20)
   def self.serialize(version, direction, directory, options = {})
+    options[:output] = directory unless options[:output]
+    output = options[:output]
     raise "#{directory} not found" unless File.exist?(directory)
+    raise "#{output} not found" unless File.exist?(output)
 
     setup_classes(version, options)
     options = options.clone()
@@ -303,12 +306,13 @@ module RGSS
     RGSS::reset_const(Table, :MAX_ROW_LENGTH, table_width ? table_width : 20)
 
     base = File.realpath(directory)
+    outbase = File.realpath(output)
 
     dirs = {
       :base   => base,
       :data   => get_data_directory(base),
-      :yaml   => get_yaml_directory(base),
-      :script => get_script_directory(base)
+      :yaml   => get_yaml_directory(outbase),
+      :script => get_script_directory(outbase)
     }
 
     dirs.values.each do |d|
