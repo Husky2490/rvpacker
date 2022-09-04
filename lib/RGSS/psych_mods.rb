@@ -44,6 +44,7 @@ require 'psych'
   module Psych
     module Visitors
       class YAMLTree < Psych::Visitors::Visitor
+        
 #         # Looks like this bug was fixed
 #         class Registrar
 #           old_initialize = self.instance_method(:initialize)
@@ -59,6 +60,7 @@ require 'psych'
 #           end
 #         end
         
+        # Sort mod
         remove_method(:visit_Hash)
         def visit_Hash o
 #           tag      = o.class == ::Hash ? nil : "!ruby/hash:#{o.class}"
@@ -81,6 +83,7 @@ require 'psych'
           end
         end
         
+        # Sort mod
         def visit_hash_subclass o
           ivars = o.instance_variables
           if ivars.any?
@@ -137,28 +140,30 @@ require 'psych'
             @emitter.end_mapping
           end
         end
-      
-#         remove_method(:visit_Object)
-#         def visit_Object o
-#           tag = Psych.dump_tags[o.class]
-#           unless tag
-#             klass = o.class == Object ? nil : o.class.name
-#             tag   = ['!ruby/object', klass].compact.join(':')
-#           end
-#           
-#           if @options[:flow_classes] && @options[:flow_classes].include?(o.class)
-#             style = Nodes::Mapping::FLOW
-#           else
-#             style = Nodes::Mapping::BLOCK
-#           end
-# 
-#           map = @emitter.start_mapping(nil, tag, false, style)
-#           register(o, map)
-# 
-#           dump_ivars o
-#           @emitter.end_mapping
-#         end
-# 
+        
+        # Flow mod
+        remove_method(:visit_Object)
+        def visit_Object o
+          tag = Psych.dump_tags[o.class]
+          unless tag
+            klass = o.class == Object ? nil : o.class.name
+            tag   = ['!ruby/object', klass].compact.join(':')
+          end
+          
+          if @options[:flow_classes] && @options[:flow_classes].include?(o.class)
+            style = Nodes::Mapping::FLOW
+          else
+            style = Nodes::Mapping::BLOCK
+          end
+
+          map = @emitter.start_mapping(nil, tag, false, style)
+          register(o, map)
+
+          dump_ivars o
+          @emitter.end_mapping
+        end
+          
+#         # Looks like this may have been fixed too
 #         remove_method(:dump_coder)
 #         def dump_coder o
 #           @coders << o
@@ -173,16 +178,17 @@ require 'psych'
 #           register o, emit_coder(c)
 #         end
         
-#         remove_method(:dump_ivars)
-#         def dump_ivars target
-#           ivars = find_ivars target
-#           ivars = ivars.sort() if @options[:sort]
-# 
-#           ivars.each do |iv|
-#             @emitter.scalar("#{iv.to_s.sub(/^@/, '')}", nil, nil, true, false, Nodes::Scalar::ANY)
-#             accept target.instance_variable_get(iv)
-#           end
-#         end
+        # Sort mod
+        remove_method(:dump_ivars)
+        def dump_ivars target
+          ivars = target.instance_variables
+          ivars = ivars.sort() if @options[:sort]
+
+          ivars.each do |iv|
+            @emitter.scalar("#{iv.to_s.sub(/^@/, '')}", nil, nil, true, false, Nodes::Scalar::ANY)
+            accept target.instance_variable_get(iv)
+          end
+        end
 
       end
     end
