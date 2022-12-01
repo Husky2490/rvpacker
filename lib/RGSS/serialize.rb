@@ -299,7 +299,7 @@ module RGSS
     setup_classes(version, options)
     options = options.clone()
     options[:sort] = true if [:vx, :xp].include?(version)
-    options[:flow_classes] = FLOW_CLASSES
+#     options[:flow_classes] = FLOW_CLASSES  # I'm having issues with diff on this one
     options[:line_width] ||= 130
 
     table_width = options[:table_width]
