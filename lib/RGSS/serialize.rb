@@ -79,9 +79,9 @@ module RGSS
 
   def self.dump(dumper, file, data, time, options)
     self.method(dumper).call(file, data, time, options)
-  rescue
-    warn "Exception dumping #{file}"
-    raise
+#   rescue
+#     warn "Exception dumping #{file}"
+#     raise
   end
 
 
@@ -162,9 +162,9 @@ module RGSS
 
   def self.load(loader, file)
     return self.method(loader).call(file)
-  rescue
-    warn "Exception loading #{file}"
-    raise
+#   rescue
+#     warn "Exception loading #{file}"
+#     raise
   end
 
 
@@ -249,8 +249,14 @@ module RGSS
       formatador.display_line("[yellow]Skipping #{file}[/]") if $VERBOSE
     else
       formatador.display_line("[green]Converting #{file} to #{dest_ext}[/]") if $VERBOSE
-      data = load(loader, src_file)
-      dump(dumper, dest_file, data, src_time, options)
+      begin
+        data = load(loader, src_file)
+        dump(dumper, dest_file, data, src_time, options)
+      rescue => error
+        formatador.display_line("[red]Error converting #{file}: #{error.message}")
+        #TODO: Add $DEBUG option
+        print error.backtrace.join("\n") if $VERBOSE
+      end
     end
   end
 
