@@ -263,6 +263,8 @@ module RGSS
   def self.convert(src, dest, options)
     files = files_with_extension(src[:directory], src[:ext])
     files -= src[:exclude]
+    #TODO: Get better progress bar library. Does not play nice with verbose.
+    progress = Formatador::ProgressBar.new(files.length, :color => "green", :started_at => Time.now) unless $VERBOSE
 
     files.each do |file|
       src_file = File.join(src[:directory], file)
@@ -270,6 +272,8 @@ module RGSS
 
       process_file(file, src_file, dest_file, dest[:ext], src[:load_file],
                    dest[:dump_file], options)
+      #TODO: RE: ProgressBar: DON'T FORGET ME!
+      progress.increment unless $VERBOSE
     end
   end
 
