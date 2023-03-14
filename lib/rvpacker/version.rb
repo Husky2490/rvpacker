@@ -1,3 +1,3 @@
 module Rvpacker
-  VERSION = "1.2.7.dev5"
+  VERSION = "1.2.8"
 end
