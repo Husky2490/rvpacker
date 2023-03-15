@@ -6,10 +6,10 @@ require 'rvpacker/version'
 Gem::Specification.new do |spec|
   spec.name          = 'rvpacker'
   spec.version       = Rvpacker::VERSION
-  spec.authors       = ["Howard Jeng", "Andrew Kesterson", 'Solistra']
-  spec.email         = ['solistra@gmx.com']
+  spec.authors       = ["Howard Jeng", "Andrew Kesterson", 'Solistra', 'Husky2490']
+  spec.email         = ['rsyanez99@gmail.com']
   spec.summary       = %q{Pack and unpack RPG Maker data files}
-  spec.homepage      = "https://github.com/Solistra/rvpacker"
+  spec.homepage      = "https://github.com/Husky2490/rvpacker"
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
