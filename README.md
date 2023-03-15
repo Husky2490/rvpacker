@@ -108,9 +108,9 @@ If you look at the map collision problem described above, the way out of this si
 This means that changing the ID number assigned to a map (and, thereby, making it possible to merge 2 maps with the same ID number) becomes very nontrivial. The event scripting portion, especially, presents a difficult problem for rvpacker to overcome. It is simple enough for rvpacker to change the IDs of any new map created, and to change the reference to that ID number from any child maps. However, the events are where it gets sticky. The format of event calls in RPG Maker map files is not terribly well defined, and even if it was, I sincerely doubt that you want rvpacker tearing around in the guts of your map events.
 
 
-Psych 2.0.0 Dependency
+Psych 3.0-3.1 Dependency
 ======================
 
-From SiCrane:
+From Husky2490:
 
-I used cygwin's ruby 1.9.3 and the Psych 2.0.0 ruby gem, which appears to be the most recent version. However, Psych 2.0.0 has some bugs that impacted the generated YAML (one major and one minor) which I monkey patched, and since I was already rewriting the Psych code, I added some functionality to make the generated YAML prettier. Long story short, this code probably won't work with any version of Psych but 2.0.0.
+This program at the moment is locked to using a very narrow range of versions of psych versions. This is because I am applying a patch to psych that directly modifies part of psych's code. This patch is needed to guarantee that YAML files always have their contents in the same order.
