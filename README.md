@@ -113,4 +113,4 @@ Psych 3.0-3.1 Dependency
 
 From Husky2490:
 
-This program at the moment is locked to using a very narrow range of versions of psych versions. This is because I am applying a patch to psych that directly modifies part of psych's code. This patch is needed to guarantee that YAML files always have their contents in the same order.
+This program at the moment is locked to using a very narrow range of versions of psych versions. This is because I am applying a patch to psych that modifies part of psych's code. This patch is needed to guarantee that YAML files always have their contents in the same order.
